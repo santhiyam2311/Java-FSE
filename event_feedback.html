@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    form {
+      max-width: 400px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+    }
+    input, select, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+    }
+    img {
+      width: 100%;
+      cursor: pointer;
+    }
+  </style>
+  <title>Event Feedback</title>
+</head>
+<body>
+  <form id="feedbackForm">
+    <label for="phone">Phone Number</label>
+    <input type="text" id="phone" placeholder="Your phone" onblur="validatePhone()" required>
+    <label for="event">Event</label>
+    <select id="event" onchange="displayFee()" required>
+      <option value="picnic">Picnic - $20</option>
+      <option value="run">Run - $25</option>
+      <option value="concert">Concert - $50</option>
+    </select>
+    <p>Event Fee: $<span id="eventFee">20</span></p>
+    <label for="feedback">Feedback</label>
+    <textarea id="feedback" placeholder="Your feedback" onkeyup="countCharacters()" required></textarea>
+    <p id="feedbackLength">Characters: 0</p>
+    <button type="button" onclick="showConfirmation()">Submit</button>
+  </form>
+  <h3>Event Image</h3>
+  <img src="event.jpg" alt="Event Image" ondblclick="enlargeImage()">
+  <output id="confirmationMessage"></output>
+  <script>
+    function validatePhone() {
+      const phone = document.getElementById('phone').value;
+      const phonePattern = /^[0-9]{10}$/;
+      if (!phonePattern.test(phone)) alert("Enter a valid 10-digit phone number.");
+    }
+    function displayFee() {
+      const event = document.getElementById('event').value;
+      let fee = 0;
+      if (event === 'picnic') fee = 20;
+      if (event === 'run') fee = 25;
+      if (event === 'concert') fee = 50;
+      document.getElementById('eventFee').textContent = fee;
+    }
+    function showConfirmation() {
+      document.getElementById('confirmationMessage').textContent = "Thanks for your feedback!";
+    }
+    function enlargeImage() {
+      const img = document.querySelector('img');
+      img.style.width = "100%";
+    }
+    function countCharacters() {
+      const feedbackText = document.getElementById('feedback').value;
+      document.getElementById('feedbackLength').textContent = `Characters: ${feedbackText.length}`;
+    }
+  </script>
+</body>
+</html>
