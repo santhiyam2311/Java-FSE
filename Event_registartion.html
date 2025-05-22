@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    form {
+      max-width: 400px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+  </style>
+  <title>Event Registration</title>
+</head>
+<body>
+  <form id="regForm">
+    <label for="name">Full Name:</label>
+    <input type="text" id="name" placeholder="Enter your name" required autofocus>
+
+    <label for="email">Email Address:</label>
+    <input type="email" id="email" placeholder="Your email" required>
+
+    <label for="date">Event Date:</label>
+    <input type="date" id="date" required>
+
+    <label for="event">Event Type:</label>
+    <select id="event" required>
+      <option value="picnic">Picnic</option>
+      <option value="run">Charity Run</option>
+      <option value="concert">Concert</option>
+    </select>
+
+    <label for="message">Additional Message:</label>
+    <textarea id="message" placeholder="Any special requests?" required></textarea>
+
+    <input type="submit" value="Register">
+  </form>
+
+  <output id="confirmation"></output>
+
+  <script>
+    document.getElementById('regForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      document.getElementById('confirmation').textContent = "Thanks for registering!";
+    });
+  </script>
+</body>
+</html>
