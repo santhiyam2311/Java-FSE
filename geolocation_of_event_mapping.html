@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nearby Events</title>
+</head>
+<body>
+  <button id="find">Find Nearby Events</button>
+  <div id="location"></div>
+
+  <script>
+    const btn = document.getElementById('find')
+    const loc = document.getElementById('location')
+
+    btn.addEventListener('click', () => {
+      if (!navigator.geolocation) {
+        loc.textContent = 'Geolocation not supported'
+        return
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        pos => {
+          let lat = pos.coords.latitude.toFixed(5)
+          let lon = pos.coords.longitude.toFixed(5)
+          loc.textContent = `Latitude: ${lat}, Longitude: ${lon}`
+        },
+        err => {
+          if (err.code === 1) loc.textContent = 'Permission denied'
+          else if (err.code === 2) loc.textContent = 'Position unavailable'
+          else if (err.code === 3) loc.textContent = 'Request timed out'
+          else loc.textContent = 'Error occurred'
+        },
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+      )
+    })
+  </script>
+</body>
+</html>
