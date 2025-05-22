@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Preferences</title>
+</head>
+<body>
+  <label for="eventType">Choose Event Type:</label>
+  <select id="eventType">
+    <option value="">--Select--</option>
+    <option value="Workshop">Workshop</option>
+    <option value="Seminar">Seminar</option>
+    <option value="Hackathon">Hackathon</option>
+  </select>
+  <button id="clearBtn">Clear Preferences</button>
+
+  <script>
+    const eventSelect = document.getElementById('eventType')
+    const clearBtn = document.getElementById('clearBtn')
+
+    const savedType = localStorage.getItem('preferredEvent')
+    if (savedType) eventSelect.value = savedType
+
+    eventSelect.addEventListener('change', () => {
+      localStorage.setItem('preferredEvent', eventSelect.value)
+    })
+
+    clearBtn.addEventListener('click', () => {
+      localStorage.clear()
+      sessionStorage.clear()
+      eventSelect.value = ''
+    })
+  </script>
+</body>
+</html>
